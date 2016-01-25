@@ -1,0 +1,27 @@
+title = "Tinklaraštis"
+url = "/tinklarastis"
+layout = "default"
+is_hidden = 0
+
+[blogCategories]
+slug = "{{ :slug }}"
+displayEmpty = 0
+categoryPage = "blog/category"
+
+[blogPosts]
+pageNumber = "{{ :page }}"
+postsPerPage = 10
+noPostsMessage = "No posts found"
+sortOrder = "published_at desc"
+categoryPage = "blog/category"
+postPage = "blog/post"
+==
+<div class="row">
+    <div class="col-md-8">
+        {% component 'blogPosts' %}
+    </div>
+    <div class="col-md-4">
+        {% component 'blogCategories' %}
+    </div>
+    
+</div>
