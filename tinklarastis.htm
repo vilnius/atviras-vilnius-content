@@ -6,15 +6,16 @@ is_hidden = 0
 [blogCategories]
 slug = "{{ :slug }}"
 displayEmpty = 0
-categoryPage = "blog/category"
+categoryPage = 404
 
 [blogPosts]
 pageNumber = "{{ :page }}"
+categoryFilter = ":slug"
 postsPerPage = 10
 noPostsMessage = "No posts found"
 sortOrder = "published_at desc"
-categoryPage = "blog/category"
-postPage = "blog/post"
+categoryPage = 404
+postPage = "tinklarastis/irasas"
 ==
 <div class="row">
     <div class="col-md-8">

@@ -1,10 +1,45 @@
 title = "Įrašas"
-url = "/tinklarastis/irasas"
+url = "/tinklarastis/irasas/:slug"
 layout = "default"
 is_hidden = 0
 
 [blogPost]
 slug = "{{ :slug }}"
 categoryPage = 404
+
+[blogCategories]
+slug = "{{ :slug }}"
+displayEmpty = 0
+categoryPage = "blog/category"
 ==
-{% component 'blogPost' %}
+<?php
+function onEnd(){
+    
+    $this->page->title = $this['post']->title;
+    $this->page->published_at = substr($this['post']->published_at, 0,10);
+    
+}
+?>
+==
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            {% component 'blogPost' %}
+        </div>
+        <div class="col-sm-4">
+            <div class="blog">
+                <img src="{{ 'assets/images/team/povilas_512px.jpg'|theme }}" alt="">
+                <div>
+                    <p>
+                        Povilas Poderskis<br />
+                        Mero patarėjas IT ir atvirų duomenų klausimais
+                    </p>
+                    <p class="text-muted">Paskelbta: {{ this.page.published_at }}</p>
+                </div>
+            </div>
+            <hr />
+            {% component 'blogCategories' %}
+        </div>
+        
+    </div>
+</div>
