@@ -16,7 +16,6 @@ categoryPage = "blog/category"
 function onEnd(){
     
     $this->page->title = $this['post']->title;
-    $this->page->published_at = substr($this['post']->published_at, 0,10);
     
 }
 ?>
@@ -34,7 +33,7 @@ function onEnd(){
                         Povilas Poderskis<br />
                         Mero patarėjas IT ir atvirų duomenų klausimais
                     </p>
-                    <p class="text-muted">Paskelbta: {{ this.page.published_at }}</p>
+                    
                 </div>
             </div>
             <hr />
