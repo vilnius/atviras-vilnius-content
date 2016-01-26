@@ -17,12 +17,14 @@ sortOrder = "published_at desc"
 categoryPage = "tinklarastis/kategorija"
 postPage = "tinklarastis/irasas"
 ==
-<div class="row">
-    <div class="col-md-8">
-        {% component 'blogPosts' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% component 'blogPosts' %}
+        </div>
+        <div class="col-md-4">
+            {% component 'blogCategories' %}
+        </div>
+        
     </div>
-    <div class="col-md-4">
-        {% component 'blogCategories' %}
-    </div>
-    
 </div>
