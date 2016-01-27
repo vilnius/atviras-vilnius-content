@@ -1,6 +1,7 @@
 title = "Eismo situacijos"
 url = "/eismo-situacijos"
 layout = "default"
+description = "Čia pateikiamos problemos identifikuojamos pagal eismo valdymo centro parodymus iš vaizdo kamerų ir iš srautų detektorių."
 is_hidden = 0
 ==
 <?php
@@ -11,4 +12,21 @@ function onStart(){
 }
 ?>
 ==
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Čia pateikiamos problemos identifikuojamos pagal eismo valdymo centro parodymus iš vaizdo kamerų ir iš srautų detektorių.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+             <span class="palette-peter-river" style="width:1em;height:1em;display:inline-block;"></span> - vakaras;<br />
+             <span class="palette-sun-flower" style="width:1em;height:1em;display:inline-block;"></span> - rytas;<br />
+             <span class="fui-cross"></span> - neįprasta situacija.
+             
+        </div>
+    </div>
+   
+</div>
+
 {{ this.page.externalContent|raw }}
