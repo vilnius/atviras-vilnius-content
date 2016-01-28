@@ -1,0 +1,37 @@
+title = "YouTube transliacijos"
+url = "/pagalba/youtube-transliacijos"
+layout = "default"
+is_hidden = 0
+==
+<div class="container">
+
+    
+    <div class="row">
+        <div class="col-md-12">
+            <p>Visos savivaldybės turi įsidiegę ES finansuojamas e.demokratijos priemones leidžiančias filmuoti, transliuoti ir įrašyti tarybos posėdžius.
+            Deja, bet technologijos naudojamos tam dažniausiai nėra plačiai palaikomos įvairiuose įrenginiuose. Pvz. yra galimybė žiūrėti tik Windows operacinėje sistemoje, nėra galimybės žiūrėti per mobilius įrenginius. Tai sukelia nemažai problemų, kurių pagrindinė, kad žmonės norintys peržiūrėti tarybos posėdžius nevisada gali tai padaryti.</p>
+            <p>Taigi, vienas iš nedidelių užduočių, kuriuos įgyvendinom buvo Tarybos posėdžių ištransliavimas į YouTube. Kadangi mūsų dažnai prašo pagelbėti šiuo klausimu, tad pateikiame trumpą instrukciją kaip tai padaryti. Toliau pateikiama informacija techninė.</p>
+            <p>Jums reikės ffmpeg įrankio: <a href="https://www.ffmpeg.org/download.html" target="_blank">https://www.ffmpeg.org/download.html</a><br />
+            Tuomet reikia susirasti iš kokio šaltinio šiuo metu yra siunčiama video transliacija. Dažniausiai tai yra RTSP srautas. Deja, YouTube šio srauto nepriima tiesiogiai, todėl jį reikia perkoduoti į RTMP. Tam ir naudojamas ffmpeg. Žinoma, galbūt čia yra ir geresnių sprendimų, bet šiuo metu naudojame tokį.</p>
+            <p>Žinoma, jums reikės susitvarkyti ir YouTube paskyrą, kurioje reikės sukonfiguruoti tiesiogines transliacijas:</p>
+            <img src="http://atviras.vilnius.lt/storage/app/media/youtube_live-events.png" width="99%" />
+            <p>Ten gausite ir transliacijai reikalingą raktą: facebook.aaaa1-abc5-aabb-56aa (pavyzdys, žinoma).</p>
+            
+      <p>Restreaminimui naudojam tokią komandą (leidžiame ją ant CentOS serverio):</p>
+<pre>
+ffmpeg -i "rtsp://xx.xx.xx.xx:123/cam/realmonitor?channel=1&subtype=00&authbasic=YWRtaW46YWRtaW4=" -ar 44100 
+-ac 2 -acodec pcm_s16le -f s16le -ac 2 -vcodec copy -acodec mp3 -g 50 -strict experimental 
+-f flv "rtmp://a.rtmp.youtube.com/live2/facebook.aaaa1-abc5-aabb-56aa"</pre>
+
+<p>Ši komanda:
+<ul>
+<li>Perkoduoja RTSP srautą;</li>
+<li>Pakeliui konvertuoja garso kodeką į MP3;</li>
+<li>YouTube tinka tik MP3 ir ACC garso kodekai;</li>
+<li>RTMP adresas gali keistis priklausomai nuo to koks tokenas nustatytas YouTube paskyroj, bet automatiškai jis nesikeičia.</li>
+</ul>
+Šią konfiguraciją dar tobulinsime, nes kartais šiek tiek prasilenkia vaizdas su garsu, nėra automatizuotos visi galimi procesai.
+</p>
+        </div>
+    </div>
+</div>
