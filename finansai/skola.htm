@@ -1,0 +1,102 @@
+title = "Informacija apie Vilniaus miesto skolą"
+url = "/finansai/skola"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+    $this->addJs('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.js');
+	$this->addJs('//cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js');
+    $this->addJs('assets/javascript/dc.js');
+    $this->addJs('assets/javascript/skola.js');
+    $this->addCss('//cdnjs.cloudflare.com/ajax/libs/dc/2.0.0-alpha.2/dc.css');
+}
+?>
+==
+<div class="container">
+
+		<h2>Vilniaus miesto skolos detalizacija</h2>
+
+	
+		<div class="row">
+		    <div class="col-md-12">
+		    	<p>Paprastai kai kalbame apie Vilniaus miesto skolą, mes dažniausiai sumuojame Vilniaus miesto savivaldybės administracijos ir biudžetinės įstaigos Buhalterinė apskaita įsiskolinimus. Čia pateikiamas įrankis patogiam naršymui idant būtų paprasčiau suprasti iš ko skola susidaro.</p>
+		    	<p>Dažnai užduodamas klausimas dėl Vilniaus arkivyskupijos. Šiuo atveju yra įvestas atidėjinys. Šią sumą yra skolinga Finansų ministerija savivaldybei - kompensacija religinėms bendrijoms, kurioms atkurta nuosavybės teisė į išlikusį nekilnojamąjį turtą, todėl mes privalome tai rodyti apskaitoje.</p>
+				<p>Duomenų šaltinis: <a href="https://github.com/vilnius/turtas">Vilniaus miesto savivaldybės atviri duomenys</a></p>
+		    </div>
+		</div>
+		    
+		<hr />
+		
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2 class="red">Vilniaus miesto skolos dydis:<br /> <span id="totalDebt" style="font-size:2em;">Skaičiuojam.</span></h2>
+			</div>
+		</div>
+		    
+		<hr />
+		
+	</div>
+	
+    <div id="vmsa" class="container">
+		
+		
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2 class="red">Vilniaus miesto savivaldybės administracija</h2>
+			</div>
+		</div>
+		
+		<hr />
+		
+		<div class="row">
+		
+			<div class="col-md-12">
+				<h4>Asignavimų valdytojas</h4>
+				<div id="valdytojas"></div>
+			</div>
+			
+			
+		</div>
+		<hr />
+		<div class="row">
+		
+			<div class="col-md-12">
+				<h4>Kreditorius</h4>
+				<div id="kreditorius"></div>
+			</div>
+			
+		</div>
+		<hr />
+		<div class="row">
+		
+			<div class="col-md-6">
+				<h4>Atidėjimas</h4>
+				<div id="atidejimas"></div>
+			</div>
+			<div class="col-md-6">
+				<h4>Sąskaitos data</h4>
+				<div id="saskaitosData"></div>
+			</div>
+			
+		</div>
+		<hr />
+			
+		<div class="row">
+		    <div class="col-md-6">
+		        <div class="dc-data-count">
+		            <span class="filter-count"></span> rodoma iš <span class="total-count"></span> įrašų | <a
+		                href="javascript:dc.filterAll(); dc.renderAll();">Atstatyti</a>
+		        </div>
+		    </div>
+		    
+		</div>
+		<div class="row">
+		    <div class="col-md-12">
+			    <table class="table table-hover table-condensed table-bordered dc-data-table">
+			    </table>
+		    </div>
+		</div>
+		
+	</div>
