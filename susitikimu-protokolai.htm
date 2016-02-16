@@ -9,6 +9,8 @@ function onStart()
     $this->addJs('//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js');
     $this->addJs('assets/javascript/knockout.simpleGrid.3.0.js');
     $this->addJs('assets/javascript/protokolai.js');
+
+    $this->page['q']= $_GET['q'];
 }
 ?>
 ==
@@ -16,9 +18,19 @@ function onStart()
     <div class="row">
         <div class="col-md-12">
             
+            <p><strong>Vilnius leaks</strong> - tai iniciatyva, kurios metu siekiama kuo skaidriau pateikti informaciją apie susitikimus su interesų grupėmis, periodinius darbinius pasitarimus, vykdomus darbus ir aptariamas problemas. Šiuo metu čia yra pasiekiami dokumentai iš savivaldybės mero rengiamų pasitarimų ir susitikimų protokolų registro.</p>
+            
             <form method="get" data-bind="submit: search">
-                <input data-bind="value: query" value="{{ this.param.query }}" /> <button data-bind="click: search">Search</button>
+                
+                <div class="input-group">
+                    <input id="search" class="form-control" placeholder="įveskite tai ko ieškote" name="q" data-bind="value: query" value="{{ this.page.q }}" />
+                    
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" data-bind="click: search">Ieškoti</button>
+                    </span>
+                </div>
             </form>
+            
             
             <table class="table table-condensed">
                 <thead>
@@ -36,6 +48,12 @@ function onStart()
                     </tr>
                 </tbody>
             </table>
+            
+            <nav>
+              <ul class="pagination" data-bind="foreach: pages">
+                <li><a href="#" data-bind="text: page, click: $parent.changePage"></a></li>
+              </ul>
+            </nav>
              
             
         </div>
