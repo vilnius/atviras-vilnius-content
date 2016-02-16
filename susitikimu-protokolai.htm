@@ -3,3 +3,29 @@ url = "/susitikimu-protokolai"
 layout = "default"
 is_hidden = 0
 ==
+<?php
+function onStart()
+{
+    $this->addJs('//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js');
+    $this->addJs('assets/javascript/knockout.simpleGrid.3.0.js');
+    $this->addJs('assets/javascript/protokolai.js');
+}
+?>
+==
+<div class='liveExample'> 
+    
+    <div data-bind='simpleGrid: gridViewModel'> </div>
+     
+    <button data-bind='click: addItem'>
+        Add item
+    </button>
+     
+    <button data-bind='click: sortByName'>
+        Sort by name
+    </button>
+     
+    <button data-bind='click: jumpToFirstPage, enable: gridViewModel.currentPageIndex'>
+        Jump to first page
+    </button>
+    
+</div>
