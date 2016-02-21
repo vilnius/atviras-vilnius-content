@@ -24,15 +24,19 @@ function onStart()
             
             <p>Ateityje planuojama plėsti dokumentų pateikimą, įtraukiant kitų savivaldybės struktūrinių padalinių dokumentus.</p>
             
-            <form method="get" data-bind="submit: search">
-                
-                <div class="input-group">
-                    <input id="search" class="form-control" placeholder="įveskite tai ko ieškote" name="q" data-bind="value: query" value="{{ this.page.q }}" />
-                    
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" data-bind="click: search">Ieškoti</button>
-                    </span>
+            <form method="get"  class="form-inline" data-bind="submit: search">
+
+                <div class="form-group">
+                    <input id="search" class="form-control" placeholder="paieška tekste" name="q" data-bind="value: query" value="{{ this.page.q }}" />
                 </div>
+                
+                <div class="form-group">
+                    <input id="searchTitle" class="form-control" placeholder="paieška pavadinime" name="q" data-bind="value: queryTitle" value="{{ this.page.qt }}" />
+                </div>
+                
+                <span class="input-group-btn">
+                <button class="btn btn-default" data-bind="click: search">Ieškoti</button>
+                </span>
             </form>
             
             
@@ -40,7 +44,7 @@ function onStart()
                 <thead>
                     <tr>
                         <th>Pavadinimas</th>
-                        <th>Sukūrimo data</th>
+                        <th style="width: 200px;">Sukūrimo data</th>
                         <td></td>
                     </tr>
                 </tbody>
@@ -55,7 +59,7 @@ function onStart()
             
             <nav>
               <ul class="pagination" data-bind="foreach: pages">
-                <li><a href="#" data-bind="text: page, click: $parent.changePage"></a></li>
+                <li data-bind="css: { active: $parent.currentPage() == page }"><a href="#" data-bind="text: page, click: $parent.changePage"></a></li>
               </ul>
             </nav>
              
