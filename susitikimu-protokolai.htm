@@ -24,17 +24,18 @@ function onStart()
             
             <p>Ateityje planuojama plėsti dokumentų pateikimą, įtraukiant kitų savivaldybės struktūrinių padalinių dokumentus.</p>
             
-            <form method="get"  class="form-inline" data-bind="submit: search">
+            
+            <form method="get"  class="" data-bind="submit: search">
 
-                <div class="form-group">
-                    <input id="search" class="form-control" placeholder="paieška tekste" name="q" data-bind="value: query" value="{{ this.page.q }}" />
+                <div class="form-group col-md-3">
+                    <input id="searchTitle" class="form-control col-md-3" placeholder="paieška pavadinime" name="q" data-bind="value: queryTitle" value="{{ this.page.qt }}" />
                 </div>
                 
-                <div class="form-group">
-                    <input id="searchTitle" class="form-control" placeholder="paieška pavadinime" name="q" data-bind="value: queryTitle" value="{{ this.page.qt }}" />
+                <div class="form-group col-md-3">
+                    <input id="search" class="form-control col-md-4" placeholder="paieška tekste (gali būti netiksli)" name="q" data-bind="value: query" value="{{ this.page.q }}" />
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-md-3">
                 <button class="btn btn-default" data-bind="click: search">Ieškoti</button>
                 </div>
             </form>
@@ -52,7 +53,10 @@ function onStart()
                     <tr>
                         <td data-bind="text: title"></td>
                         <td data-bind="text: date"></td>
-                        <td><a href="" data-bind="attr: { href: link }">Atsisiųsti</a></td>
+                        <td>
+                            <a href="" data-bind="attr: { href: link }">Atsisiųsti</a>
+                            <a href="" data-bind="attr: { href: htmlLink }, css: { hidden: html()==0 }">Peržiūrėti</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -63,6 +67,13 @@ function onStart()
               </ul>
             </nav>
              
+             <p>Netolimoje ateityje planuojame šią sistemą išplėsti šiomis funkcijomis:</p>
+             <ul>
+                 <li>Geresne paieška dokumentų viduje;</li>
+                 <li>Galimybe filtruoti pagal asmenis dalyvavusius susitikime;</li>
+                 <li>Galimybė išsaugoti konkrečios paieškos adresą;</li>
+                 <li>Galimybė filtruoti pagal protokolo ir protokolo sukūrimo datą.</li>
+             </ul>
             
         </div>
     </div>
