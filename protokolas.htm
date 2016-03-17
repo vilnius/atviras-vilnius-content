@@ -6,6 +6,13 @@ is_hidden = 0
 <?php
 function onStart(){
     
+    $this->page['protokolas']=
+        json_decode(
+            file_get_contents(
+                "http://atviras.vilnius.lt/protokolai.php?responseType=single&id=".$this->param('id')
+            )
+        );
+        
     $this->page['externalContent']=file_get_contents("http://atviras.vilnius.lt/protokolai.php?responseType=html&q=".$this->param('id'));
     
 }
@@ -15,8 +22,12 @@ function onStart(){
     
     <div class="row">
         <div class="col-md-12">
-            Dokumentai:
-            <a href="" data-bind="attr: { href: link }">Atsisiųsti</a>
+            <h4>{{ this.page.protokolas.title }}</h4>
+            <p>Dokumentai:</p>
+            <ul>
+                <li><a href="/protokolai.php?responseType=file&q={{ this.page.protokolas.id }}">Atsisiųsti</a></li>
+            </ul>
+            
         </div>
     </div>
         
