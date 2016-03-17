@@ -25,12 +25,14 @@ function onStart(){
             <h4>{{ this.page.protokolas.title }}</h4>
             <p>Dokumentai:</p>
             <ul>
-                <li><a href="/protokolai.php?responseType=file&q={{ this.page.protokolas.id }}">Atsisiųsti</a></li>
+                {% for f in this.page.protokolas.documents %}
+                <li>{{ f.filename }} - <a href="/protokolai.php?responseType=file&q={{ f.id }}">Atsisiųsti</a></li>
+                {% endfor %}
             </ul>
             
         </div>
     </div>
-        
+    {% if this.page.externalContent %}
     <div class="row">
         <div class="col-md-12">
             <h4>Peržiūra</h4>
@@ -41,4 +43,5 @@ function onStart(){
         {{ this.page.externalContent|raw }}
         </div>
     </div>
+    {% endif %}
 </div>
