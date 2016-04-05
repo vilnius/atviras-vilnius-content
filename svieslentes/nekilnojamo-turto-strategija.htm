@@ -3,10 +3,106 @@ url = "/svieslentes/nekilnojamo-turto-strategija"
 layout = "default"
 is_hidden = 0
 ==
-1.	Neregistruotus statinius,  įregistruoti viešuosiuose registruose Savivaldybės vardu:
+<?php
+function onStart()
+{
+    $this->addJs('https://www.amcharts.com/lib/3/amcharts.js');
+    $this->addJs('https://www.amcharts.com/lib/3/gauge.js');
+    $this->addJs('https://www.amcharts.com/lib/3/themes/light.js');
+    $this->addJs('assets/javascript/nt.js');
+}
+?>
+==
+<style type="text/css">
+.chartdiv {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+.bigNumberGood, .bigNumberBad, .bigArrow{
+    text-align:center;
+    line-height:1.5em;
+    font-size:10em;
+    font-weight:bold;
+}
+.bigNumberBad{
+    color: #cc4748;
+}
+.bigArrow{
+    color: #fdd400;
+    line-height:1.9em;
+}
+.bigNumberGood{
+    color: #84b761;
+}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Tikslai</h2>
+        </div>
+    </div>
+    
+    <ol>
+        <li></li>
+    </ol>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Rodikliai</h2>
+        </div>
+    </div>
+    <!-- rodiklis -->
+    <div class="row">
+        <div class="col-md-12">
+            <h4>1. Neregistruotus statinius, įregistruoti Savivaldybės vardu:</h4>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-5">
+            <h5>Dabar, 2016 m., yra:</h5>
+            <div class="bigNumberBad">60%</div>
+        </div>
+        <div class="col-md-2">
+            <div class="bigArrow">&#x2192;</div>
+            
+        </div>
+        <div class="col-md-5">
+            <h5>Siekiame iki 2016 m. III ketvirčio:</h5>
+            <div class="bigNumberGood">100%</div>
+        </div>
+    </div>
+    <!-- end rodiklis -->
+    <!-- rodiklis -->
+    <div class="row">
+        <div class="col-md-12">
+            <h4>2. Pereiti nuo lengvatinės nuomos ir panaudos prie nuomos rinkos kaina:</h4>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-5">
+            <h5>Dabar, 2016 m., yra:</h5>
+            <div class="bigNumberBad smaller">84 tūkst. m<sup>2</sup></div>
+        </div>
+        <div class="col-md-2">
+            <div class="bigArrow">&#x2192;</div>
+            
+        </div>
+        <div class="col-md-5">
+            <h5>Siekiame iki 2020:</h5>
+            <div class="bigNumberGood">60 tūkst. m<sup>2</sup></div>
+        </div>
+    </div>
+    <!-- end rodiklis -->
+    
+
+
+
 dabartinė reikšmė (2016 metai) – 30 procentų;
-siektina reikšmė (2016 metų trečias ketvirtis) – 100 procentų.
-2.	Pereiti nuo lengvatinės nuomos ir panaudos prie nuomos rinkos kaina:
+ – 100 procentų.
+
 dabartinė reikšmė (2016 metai) – 100 procentų;
 siektina reikšmė (2020 metai) – 50 procentų.
 3.	Plėsti nekilnojamojo turto viešinimo kanalus ir didinti pardavimų e. aukcionuose skaičių:
