@@ -1,0 +1,22 @@
+title = "Komandiruotes"
+url = "/komandiruotes"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+    $this->addJs('https://www.amcharts.com/lib/3/ammap.js');
+    $this->addJs('https://www.amcharts.com/lib/3/maps/js/worldLow.js');
+    $this->addJs('https://www.amcharts.com/lib/3/themes/light.js');
+    $this->addJs('assets/javascript/komandiruotes.js');
+}
+?>
+==
+<style type="text/css">
+#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}
+</style>
+<div id="chartdiv"></div>
