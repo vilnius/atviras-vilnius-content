@@ -9,6 +9,7 @@ function onStart()
     $this->addJs('https://www.amcharts.com/lib/3/ammap.js');
     $this->addJs('https://www.amcharts.com/lib/3/maps/js/worldLow.js');
     $this->addJs('https://www.amcharts.com/lib/3/themes/light.js');
+    $this->addJs('//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js');
     $this->addJs('assets/javascript/komandiruotes.js');
 }
 ?>
@@ -18,10 +19,88 @@ function onStart()
 	width	: 100%;
 	height	: 500px;
 }
+.timeline{
+	list-style-type: none;
+	margin:0;
+	padding:0;
+	height:68px;
+	margin:15px 0px;
+}
+.timeline > li{
+	margin-left:5px;
+	width:69px;
+	height:68px;
+	display:block;
+	float:left;
+}
+.timeline > li:first-child{
+	margin-left:0px;
+}
+.timeline > li > a{
+    border-radius: 35px;
+    border: 3px solid #e8432e;
+    padding: 20px 12px;
+	float:left;
+	display:block;
+	width: 69px;
+	text-align:center;
+	color:#e8432e;
+}
+.timeline > li > a:hover, .timeline > li.selected > a{
+    background:#e8432e;
+    color:#fff;
+    text-decoration:none;
+}
 </style>
-<select id="year" name="year">
-    {% for year in "now"|date("Y")..(2007) %}
-        <option value="{{ year }}">{{ year }}</option>
-    {% endfor %}
-</select>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="timeline">
+                {% for year in (2007).."now"|date("Y") %}
+                    <li {% if year=="now"|date("Y") %}class="selected"{% endif %}>
+                        <a id="year_{{ year }}" href="#{{ year }}">{{ year }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<input type="hidden" name="year" id="year" value="{{ "now"|date("Y") }}" />
+
 <div id="chartdiv"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <p>Pagaminta iš atvirų duomenų: <a href="https://github.com/vilnius/komandiruotes" target="_blank">github.com/vilnius/komandiruotes</a></p>
+            <table class="table table-condensed table-bordered">
+                <thead>
+                    <tr>
+                        <th>Vieta</th>
+                        <th>Tikslas</th>
+                        <th>Renginys</th>
+                        <th style="width:130px;">Data</th>
+                        <th>Dalyvis</th>
+                        <th>Įstaiga</th>
+                    </tr>
+                </tbody>
+                <tbody data-bind="foreach: items">
+                    <tr>
+                        <td><span data-bind="text: MIESTAS"></span>, <span data-bind="text: SALIS"></span></td>
+                        <td data-bind="text: TIKSLAS"></td>
+                        <td data-bind="text: RENGINYS"></td>
+                        <td class="text-center">
+                          <span data-bind="text: DATA_NUO"></span><br />
+                          &ndash;<br />
+                          <span data-bind="text: DATA_IKI"></span>
+                        </td>
+                        <td><span data-bind="text: VARDAS"></span> <span data-bind="text: PAVARDE"></span><br /><span data-bind="text: PAREIGOS"></span></td>
+                        <td data-bind="text: ISTAIGA"></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
