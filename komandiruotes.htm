@@ -19,4 +19,9 @@ function onStart()
 	height	: 500px;
 }
 </style>
+<select id="year" name="year">
+    {% for year in "now"|date("Y")..(2007) %}
+        <option value="{{ year }}">{{ year }}</option>
+    {% endfor %}
+</select>
 <div id="chartdiv"></div>
