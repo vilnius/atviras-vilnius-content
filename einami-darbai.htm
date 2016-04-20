@@ -1,0 +1,21 @@
+title = "Einami darbai"
+url = "/einami-darbai"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart(){
+    
+    $this->page['externalContent']=file_get_contents("http://atviras.vilnius.lt/darbas.php");
+
+}
+?>
+==
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {{ this.page.externalContent|raw }}
+        </div>
+    </div>
+   
+</div>
