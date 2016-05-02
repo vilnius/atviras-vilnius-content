@@ -6,6 +6,11 @@ is_hidden = 0
 <?php
 function onStart()
 {
+    $this->addJs('https://www.amcharts.com/lib/3/amcharts.js');
+    $this->addJs('https://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js');
+    $this->addJs('https://www.amcharts.com/lib/3/serial.js');
+    $this->addJs('https://www.amcharts.com/lib/3/themes/light.js');
+    
     $this->addJs('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.js');
 	$this->addJs('//cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js');
     $this->addJs('assets/javascript/dc.js');
@@ -14,6 +19,12 @@ function onStart()
 }
 ?>
 ==
+<style type="text/css">
+#aggregateDebt {
+	width	: 100%;
+	height	: 500px;
+}
+</style>
 <div class="container">
 	
 		<div class="row">
@@ -35,6 +46,14 @@ function onStart()
 		<hr />
 		
 	</div>
+		
+    <div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+	            <div id="aggregateDebt"></div>
+            </div>
+        </div>
+    </div>
 	
     <div id="vmsa" class="container">
 		
