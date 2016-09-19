@@ -1,12 +1,78 @@
-title = "TrueHome"
+title = "Pradinis puslapis"
 url = "/"
+layout = "default"
 is_hidden = 0
+
+[blogCategories]
+slug = "{{ :slug }}"
+displayEmpty = 0
+categoryPage = "blog/category"
+
+[blogPosts]
+pageNumber = "{{ :page }}"
+postsPerPage = 10
+noPostsMessage = "No posts found"
+sortOrder = "published_at desc"
+categoryPage = 404
+postPage = 404
 ==
-<?php
-function onStart()
-{
-    header("Location: /tinklarastis");
-    exit;
-}
-?>
-==
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    <div class="tile">
+                        <img src="{{ 'assets/images/icons/svg/Shopping/shopping-02.svg'|theme }}" alt="Infinity-Loop" class="tile-image">
+                        <h3 class="tile-title">Atvirų duomenų portalas</h3>
+                        <p>Nuolat atnaujinami duomenys iš įvairių šaltinių visoje savivaldybėje.</p>
+                        <a class="btn btn-primary btn-large btn-block" target="_blank" href="https://github.com/vilnius">Peržiūrėti</a>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    
+                    <div class="tile">
+                        <img src="{{ 'assets/images/icons/svg/SEO/SEO-46.svg'|theme }}" alt="Infinity-Loop" class="tile-image">
+                        <h3 class="tile-title">Geografinių atvirų duomenų portalas</h3>
+                        <p>Nuolat atnaujinami duomenys iš Vilniaus plano.</p>
+                        <a class="btn btn-primary btn-large btn-block" target="_blank" href="https://gis.opendata.lt">Peržiūrėti</a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    <div class="tile">
+                        <img src="{{ 'assets/images/icons/svg/Shopping/shopping-02.svg'|theme }}" alt="Infinity-Loop" class="tile-image">
+                        <h3 class="tile-title">Demokratija</h3>
+                        <p>Įvairi informacija susijusi su politikais ir demokratiniu procesu.</p>
+                        <a class="btn btn-primary btn-large btn-block" target="_blank" href="/kategorijos/demokratija">Peržiūrėti</a>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    
+                    <div class="tile">
+                        <img src="{{ 'assets/images/icons/svg/SEO/SEO-63.svg'|theme }}" alt="Infinity-Loop" class="tile-image">
+                        <h3 class="tile-title">Finansai, turtas</h3>
+                        <p>Viešųjų finansų bei savivaldybės valdomo turto informacija.</p>
+                        <a class="btn btn-primary btn-large btn-block" href="/kategorijos/finansai-ir-turtas">Peržiūrėti</a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <div class="sidebar col-md-4">
+            {% component 'blogPosts' %}
+        </div>
+        
+    </div>
+</div>
