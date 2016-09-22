@@ -3,18 +3,14 @@ url = "/"
 layout = "default"
 is_hidden = 0
 
-[blogCategories]
-slug = "{{ :slug }}"
-displayEmpty = 0
-categoryPage = "blog/category"
-
 [blogPosts]
 pageNumber = "{{ :page }}"
+categoryFilter = ":slug"
 postsPerPage = 10
 noPostsMessage = "No posts found"
 sortOrder = "published_at desc"
-categoryPage = 404
-postPage = 404
+categoryPage = "tinklarastis/kategorija"
+postPage = "tinklarastis/irasas"
 ==
 <div class="container">
     <div class="row">
