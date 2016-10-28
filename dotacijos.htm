@@ -1,0 +1,70 @@
+title = "Dotacijos"
+url = "/dotacijos"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+    
+    $this->addJs('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.js');
+	$this->addJs('//cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js');
+    $this->addJs('assets/javascript/dc.js');
+    $this->addJs('assets/javascript/dotacijos.js');
+    $this->addCss('//cdnjs.cloudflare.com/ajax/libs/dc/2.0.0-alpha.2/dc.css');
+    //$this->page['debtDate']=isset($_GET['date'])?date('Y-m-d', strtotime($_GET['date'])):date('Y-m-d');
+}
+?>
+==
+<style type="text/css">
+#aggregateDebt {
+	width	: 100%;
+	height	: 500px;
+}
+</style>
+<input id="debtDateVar" type="hidden" value="{{ this.page.debtDate }}" />
+<div class="container">
+	
+		<div class="row">
+		    <div class="col-md-12">
+		    	<p>Paprastai kai kalbame apie Vilniaus miesto skolą, mes dažniausiai sumuojame Vilniaus miesto savivaldybės administracijos ir biudžetinės įstaigos Buhalterinė apskaita įsiskolinimus. Čia pateikiamas įrankis patogiam naršymui idant būtų paprasčiau suprasti iš ko skola susidaro.</p>
+		    	
+				<p>Duomenų šaltinis: <a href="https://github.com/vilnius/biudzetas">Vilniaus miesto savivaldybės atviri duomenys</a></p>
+		    </div>
+		</div>
+		    
+		<hr />
+		
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2 class="red">Vilniaus miesto dotacijos per 2016 metus:<br /> <span id="totalDotation" style="font-size:2em;">Skaičiuojam.</span></h2>
+			</div>
+		</div>
+		    
+		<hr />
+		
+		<h2>Tikslas</h2>
+		<div id="tikslas"></div>
+		<h2>Programa</h2>
+		<div id="programa"></div>
+		
+		
+		<div class="row">
+		    <div class="col-md-6">
+		        <div class="dc-data-count">
+		            <span class="filter-count"></span> rodoma iš <span class="total-count"></span> įrašų | <a
+		                href="javascript:dc.filterAll(); dc.renderAll();">Atstatyti</a>
+		        </div>
+		    </div>
+		    
+		</div>
+		<div class="row">
+		    <div class="col-md-12">
+			    <table class="table table-hover table-condensed table-bordered dc-data-table">
+			    </table>
+		    </div>
+		</div>		
+		
+	</div>
+		
+</div>
