@@ -17,8 +17,16 @@ function onStart()
 ?>
 ==
 <style type="text/css">
-
-.dc-table-column_2, .dc-table-column_3, .dc-table-column_4 , .dc-table-column_5 , .dc-table-column_6 {
+.dc-table-row{
+    font-family: Open Sans, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+}
+.dc-table-column_2{
+    white-space: normal;
+    text-align:left;
+}
+ .dc-table-column_4 , .dc-table-column_5 , .dc-table-column_6 , .dc-table-column_7 {
     white-space: nowrap;
     font-family: monospace;
     text-align: right;
@@ -55,7 +63,7 @@ function onStart()
 		<div class="row">
 		    <div class="col-md-6">
 		        <div class="dc-data-count">
-		            <span class="filter-count"></span> rodoma iš <span class="total-count"></span> įrašų | <a
+		            <span class="filter-count"></span> (suma: <span class="filter-sum"></span>) rodoma iš <span class="total-count"></span> įrašų | <a
 		                href="javascript:dc.filterAll(); dc.renderAll();">Atstatyti</a>
 		        </div>
 		    </div>
