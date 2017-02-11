@@ -1,0 +1,45 @@
+title = "Viešojo transporto rodikliai"
+url = "/viesojo-transporto-rodikliai"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+    $this->addJs('https://www.amcharts.com/lib/3/amcharts.js');
+    $this->addJs('https://www.amcharts.com/lib/3/plugins/dataloader/dataloader.min.js');
+    $this->addJs('https://www.amcharts.com/lib/3/serial.js');
+    $this->addJs('https://www.amcharts.com/lib/3/themes/light.js');
+    
+    $this->addJs('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.js');
+	$this->addJs('//cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js');
+    $this->addJs('assets/javascript/dc.js');
+    $this->addJs('assets/javascript/velavimai.js');
+    $this->addCss('//cdnjs.cloudflare.com/ajax/libs/dc/2.0.0-alpha.2/dc.css');
+    $this->page['debtDate']=isset($_GET['date'])?date('Y-m-d', strtotime($_GET['date'])):date('Y-m-d');
+}
+?>
+==
+<style type="text/css">
+#overallInfo {
+	width	: 100%;
+	height	: 500px;
+}
+</style>
+
+<div class="container">
+		
+		    
+		<hr />
+		
+	</div>
+		
+    <div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+	            <div id="overallInfo"></div>
+            </div>
+        </div>
+    </div>
+	
+</div>
