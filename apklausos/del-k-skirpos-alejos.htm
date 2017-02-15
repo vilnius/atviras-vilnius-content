@@ -3,21 +3,215 @@ url = "/apklausos/skirpa"
 layout = "default"
 is_hidden = 0
 ==
+<?php
+function onStart()
+{
+    $this->addJs('https://www.amcharts.com/lib/3/amcharts.js');
+    $this->addJs('https://www.amcharts.com/lib/3/pie.js');
+    
+}
+?>
+==
+<style type="text/css">
+#uzpries,#pasiulymai {
+	width	: 100%;
+	height	: 500px;
+}
+</style>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<script type="text/javascript">
+	AmCharts.makeChart("uzpries",
+		{
+			"type": "pie",
+			"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+			"gradientType": "linear",
+			"colors": [
+				"#04D215",
+				"#F8FF01"
+			],
+			"titleField": "category",
+			"valueField": "column-1",
+			"fontSize": 14,
+			"allLabels": [],
+			"balloon": {},
+			"legend": {
+				"enabled": true,
+				"align": "center",
+				"markerType": "circle"
+			},
+			"titles": [],
+			"dataProvider": [
+				{
+					"category": "Už pakeitimą / For changing",
+					"column-1": "451"
+				},
+				{
+					"category": "Prieš pakeitimą / Against changing",
+					"column-1": "193"
+				}
+			]
+		}
+	);
+	
+
+	AmCharts.makeChart("pasiulymai",
+		{
+        	"type": "pie",
+        	"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+        	"gradientType": "linear",
+            "colors": [
+            		"#FF0F00",
+            		"#FF9E01",
+            		"#FCD202",
+            		"#F8FF01",
+            		"#B0DE09",
+            		"#04D215",
+            		"#0D8ECF",
+            		"#0D52D1",
+            		"#2A0CD0",
+            		"#8A0CCF",
+            		"#CD0D74",
+            		"#754DEB",
+            		"#DDDDDD",
+            		"#999999",
+            		"#333333",
+            		"#000000",
+            		"#57032A",
+            		"#CA9726",
+            		"#990000",
+            		"#4B0C25"
+            	],
+        	"titleField": "category",
+        	"valueField": "column-1",
+        	"fontSize": 14,
+        	"allLabels": [],
+        	"balloon": {},
+        	"legend": {
+        		"enabled": true,
+        		"align": "center",
+        		"markerType": "circle"
+        	},
+        	"titles": [],
+        	"dataProvider": [
+        		{
+        			"category": "Teisuolių alėja",
+        			"column-1": "181"
+        		},
+        		{
+        			"category": "Vilnelės alėja",
+        			"column-1": "179"
+        		},
+        		{
+        			"category": "Gediminaičių alėja",
+        			"column-1": "94"
+        		},
+        		{
+        			"category": "Trispalvės alėja",
+        			"column-1": "56"
+        		},
+        		{
+        			"category": "Kita",
+        			"column-1": "111"
+        		},
+        		{
+        			"category": "Nesiūlo",
+        			"column-1": "97"
+        		}
+        	]
+        }
+	);
+	
+
+
+	AmCharts.makeChart("vieta",
+		{
+        	"type": "pie",
+        	"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+        	"gradientType": "linear",
+            "colors": [
+            		"#FF0F00",
+            		"#FF9E01",
+            		"#FCD202",
+            		"#F8FF01",
+            		"#B0DE09",
+            		"#04D215",
+            		"#0D8ECF",
+            		"#0D52D1",
+            		"#2A0CD0",
+            		"#8A0CCF",
+            		"#CD0D74",
+            		"#754DEB",
+            		"#DDDDDD",
+            		"#999999",
+            		"#333333",
+            		"#000000",
+            		"#57032A",
+            		"#CA9726",
+            		"#990000",
+            		"#4B0C25"
+            	],
+        	"titleField": "category",
+        	"valueField": "column-1",
+        	"fontSize": 14,
+        	"allLabels": [],
+        	"balloon": {},
+        	"legend": {
+        		"enabled": true,
+        		"align": "center",
+        		"markerType": "circle"
+        	},
+        	"titles": [],
+        	"dataProvider": [
+        		{
+        			"category": "Teisuolių alėja",
+        			"column-1": "181"
+        		},
+        		{
+        			"category": "Vilnelės alėja",
+        			"column-1": "179"
+        		},
+        		{
+        			"category": "Gediminaičių alėja",
+        			"column-1": "94"
+        		},
+        		{
+        			"category": "Trispalvės alėja",
+        			"column-1": "56"
+        		},
+        		{
+        			"category": "Kita",
+        			"column-1": "111"
+        		},
+        		{
+        			"category": "Nesiūlo",
+        			"column-1": "97"
+        		}
+        	]
+        }
+	);
+</script>
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center">
-            <img src="http://atviras.vilnius.lt/storage/app/media/image.png" alt="" align="center" />
+            <div id="uzpries"></div>
         </div>
-    </div>        
+    </div>             
+    <hr />   
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
+            <div id="vieta"></div>
             <iframe style="border:0;height:500px;width:600px" src="https://docs.google.com/spreadsheets/d/1tbMywpKChFXSgQJin2AE5N-t8UiQm1v_KfuDOyz9in8/pubchart?oid=1013263427&amp;format=interactive"></iframe>
         </div>
-        <div class="col-md-6">
-            <iframe style="border:0;height:400px;width:600px" src="https://docs.google.com/spreadsheets/d/1tbMywpKChFXSgQJin2AE5N-t8UiQm1v_KfuDOyz9in8/pubchart?oid=740302564&amp;format=interactive"></iframe>
+    </div>        
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <div id="pasiulymai"></div>
         </div>
     </div>
-            
+                    
+    <hr />
             
     <div class="row">
         <div class="col-md-12">
