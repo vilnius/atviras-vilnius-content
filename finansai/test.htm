@@ -1,5 +1,5 @@
-title = "Test"
-url = "/finansai/test"
+title = "Patvirtintas biudžetas"
+url = "/finansai/patvirtintas-biudzetas"
 layout = "default"
 is_hidden = 0
 ==
@@ -10,7 +10,7 @@ function onStart()
     $this->addJs('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.js');
 	$this->addJs('//cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js');
     $this->addJs('assets/javascript/dc.js');
-    $this->addJs('assets/javascript/test.js');
+    $this->addJs('assets/javascript/biudzetas.js');
     $this->addCss('//cdnjs.cloudflare.com/ajax/libs/dc/2.0.0-alpha.2/dc.css');
     //$this->page['debtDate']=isset($_GET['date'])?date('Y-m-d', strtotime($_GET['date'])):date('Y-m-d');
 }
@@ -34,7 +34,7 @@ function onStart()
 }
 </style>
 <input id="debtDateVar" type="hidden" value="{{ this.page.debtDate }}" />
-<div class="container">
+<div class="container" id="contentContainer">
 	
 		<div class="row">
 		    <div class="col-md-12">
@@ -50,7 +50,7 @@ function onStart()
 		
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<h2 class="red">Vilniaus miesto dotacijos per 2016 metus:<br /> <span id="totalDotation" style="font-size:2em;">Skaičiuojam.</span></h2>
+				<h2 class="red">Vilniaus miesto patvirtintas biudžetas per 2017 metus:<br /> <span id="totalDotation" style="font-size:2em;">Skaičiuojam.</span></h2>
 			</div>
 		</div>
 		    
@@ -61,6 +61,8 @@ function onStart()
 		<h2>Programa</h2>
 		<div id="programa"></div>
 		
+		<h2>Asignavimų valdytojas</h2>
+		<div id="valdytojas"></div>
 		
 		<div class="row">
 		    <div class="col-md-6">
