@@ -1,0 +1,77 @@
+title = "Audito ataskaitos"
+url = "/audito-ataskaitos"
+layout = "default"
+is_hidden = 0
+==
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <p><strong>Vilnius leaks</strong> - tai iniciatyva, kurios metu siekiama kuo skaidriau pateikti informaciją apie susitikimus su interesų grupėmis, periodinius darbinius pasitarimus, vykdomus darbus ir aptariamas problemas. Šiuo metu čia yra pasiekiami dokumentai iš savivaldybės mero rengiamų pasitarimų ir susitikimų protokolų registro.</p>
+            
+            <p>Šie išviešinti protokolai yra pildomi susitikimų metu. Paprastai per vieną darbo dieną, jie sutvarkomi, pasirašomi ir įkeliami į savivaldybės dokumentų valdymo sistemą @vilys. Atviras Vilnius kas valandą tikrina, ar šios sistemos minėtame registre yra naujų dokumentų. Jeigu jų randama, jie nuskaitomi, suindeksuojami ir pateikiami paieškai.</p>
+            
+            <p>Ateityje planuojama plėsti dokumentų pateikimą, įtraukiant kitų savivaldybės struktūrinių padalinių dokumentus.</p>
+            
+            
+            <form method="get"  class="" data-bind="submit: search">
+
+                <div class="form-group col-md-3">
+                    <input id="searchTitle" class="form-control col-md-3" placeholder="paieška pavadinime" name="q" data-bind="value: queryTitle" value="{{ this.page.qt }}" />
+                </div>
+                
+                <div class="form-group col-md-3">
+                    <input id="search" class="form-control col-md-4" placeholder="paieška tekste (gali būti netiksli)" name="q" data-bind="value: query" value="{{ this.page.q }}" />
+                </div>
+                <div class="form-group col-md-3">
+                    <select id="register" name="register" class="form-control" data-bind="value: register" value="{{ this.page.register }}">
+                        <option value="">Visos sritys</option>
+                        <option value="1">Pasitarimų ir susitikimų protokolai</option>
+                        <option value="2">Eismo saugumo komisijos posėdžių protokolai</option>
+                        <option value="3">Viešojo transporto eismo organizavimo darbo grupės posėdžių protokolai</option>
+                        <option value="4">Pavadinimų, paminklų ir atminimo lentų komisijos posėdžių protokolai</option>
+                        <option value="5">Ekonomikos ir finansų komiteto posėdžių protokolai</option>
+                        <option value="6">Pasitarimų, susirinkimų, susitikimų, sueigų protokolai</option>
+                        <option value="7">Audito veiklos ataskaitos</option>
+                    </select>
+                </div>
+                
+                <div class="form-group col-md-3">
+                <button class="btn btn-default" data-bind="click: search">Ieškoti</button>
+                </div>
+            </form>
+            
+            <div class="progress hide">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                    <span class="sr-only">Kraunama</span>
+                </div>
+            </div>
+            
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Pavadinimas</th>
+                        <th style="width: 200px;">Sukūrimo data</th>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody data-bind="foreach: items">
+                    <tr>
+                        <td data-bind="text: title"></td>
+                        <td data-bind="text: date"></td>
+                        <td>
+                            <a href="" data-bind="attr: { href: htmlLink }">Peržiūrėti</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <nav>
+              <ul class="pagination" data-bind="foreach: pages">
+                <li data-bind="css: { active: $parent.currentPage() == page }"><a href="#" data-bind="text: page, click: $parent.changePage"></a></li>
+              </ul>
+            </nav>
+             
+        </div>
+    </div>
+</div>
