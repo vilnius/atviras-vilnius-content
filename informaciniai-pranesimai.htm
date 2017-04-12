@@ -8,7 +8,10 @@ function onStart()
 {
     $this['counties'] = Db::select('SELECT c.id, c.title, COUNT(n.id) AS cnt FROM county c LEFT JOIN notification n ON n.county=c.id GROUP BY c.id, c.title ORDER BY title');
     $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n WHERE n.county=0');
-    $this['v_cnt'] = $v[0]->cnt;
+    $this['v_cnt'] = $v[0]->cnt;    
+    
+    $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n');
+    $this['t_cnt'] = $v[0]->cnt;
     
     
     
@@ -51,7 +54,8 @@ function onStart()
             <h3>Seniūnijos</h3>
             
             <div class="counties">
-                <div class="filter"><a href="?county=0">Visos / nenurodyta ({{ v_cnt }})</a></div>
+                <div class="filter"><a href="/informaciniai-pranesimai">Visos ({{ t_cnt }})</a></div>
+                <div class="filter"><a href="?county=0">Nenurodyta ({{ v_cnt }})</a></div>
                 {% for c in counties %}
                 <div class="filter"><a href="?county={{ c.id }}">{{ c.title }} ({{ c.cnt }})</a></div>
                 {% endfor %}
