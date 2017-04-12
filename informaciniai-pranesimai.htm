@@ -1,4 +1,4 @@
-title = "informaciniai-pranešimai"
+title = "Informaciniai pranešimai"
 url = "/informaciniai-pranesimai"
 layout = "default"
 is_hidden = 0
@@ -10,8 +10,13 @@ function onStart()
     $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n WHERE n.county=0');
     $this['v_cnt'] = $v[0]->cnt;
     
-    if(isset($_GET['county']))
+    
+    
+    if(isset($_GET['county'])){
     $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county ORDER BY date DESC', ['county' => intval($_GET['county'])]);
+    $county=Db::select('SELECT * FROM county c WHERE c.id=:county', ['county' => intval($_GET['county'])]);
+    $this['county'] = $county[0];
+    }
     else{
     $this['all']=true;
     $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id ORDER BY date DESC LIMIT 50');
@@ -19,31 +24,63 @@ function onStart()
 }
 ?>
 ==
+<style type="text/css">
+    .counties{
+        margin:0;
+        padding:0;
+    }
+    .counties .filter a{
+        display:block;
+        padding:15px;
+        margin: 10px 10px 10px 0px;
+        width:30%;
+        float:left;
+        border:3px solid #16a085;
+    }
+    .counties .filter a:hover{
+        color:#fff;
+        background:#16a085;
+    }
+</style>
+
 <div class="container">
+    
     <div class="row">
         <div class="col-md-12">
             
-            <h2>Seniūnijos</h2>
-            <ul class="counties">
-                <li><a href="?county=0">Visos / nenurodyta ({{ v_cnt }})</a></li>
-                {% for c in counties %}
-                    <li><a href="?county={{ c.id }}">{{ c.title }} ({{ c.cnt }})</a></li>
-                {% endfor %}
-            </ul>
+            <h3>Seniūnijos</h3>
             
-            <hr />
+            <div class="counties">
+                <div class="filter"><a href="?county=0">Visos / nenurodyta ({{ v_cnt }})</a></div>
+                {% for c in counties %}
+                <div class="filter"><a href="?county={{ c.id }}">{{ c.title }} ({{ c.cnt }})</a></div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            
             {% if all %}
             <h5>Rodomi paskutiniai 50 pranešimų iš visų seniūnijų</h5>
+            {% else %}
+            <h5>{{ county.title }}</h5>
             {% endif %}
+    
+        </div>
+    </div>
+</div>
             <table class="table table-condensed">
                 <tr>
-                    <th>Data</th>
-                    <th>Gavėjas</th>
+                    <th width="130">Data</th>
+                    <th width="250">Gavėjas</th>
                     <th>Informacija</th>
                     {% if all %}
                     <th>Seniūnija</th>
                     {% endif %}
-                    <th>Adresas</th>
+                    <th width="300">Adresas</th>
                 </tr>
             {% for n in notifications %}
                 <tr>
@@ -57,6 +94,3 @@ function onStart()
                 </tr>
             {% endfor %}
             </table>
-        </div>
-    </div>
-</div>
