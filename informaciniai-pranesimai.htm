@@ -11,7 +11,11 @@ function onStart()
     $this['v_cnt'] = $v[0]->cnt;
     
     if(isset($_GET['county']))
-    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county', ['county' => intval($_GET['county'])]);
+    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county ORDER BY date DESC', ['county' => intval($_GET['county'])]);
+    else{
+    $this['all']=true;
+    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id ORDER BY date DESC LIMIT 50');
+    }
 }
 ?>
 ==
@@ -28,15 +32,27 @@ function onStart()
             </ul>
             
             <hr />
+            {% if all %}
+            <h5>Rodomi paskutiniai 50 pranešimų iš visų seniūnijų</h5>
+            {% endif %}
             <table class="table table-condensed">
+                <tr>
+                    <th>Data</th>
+                    <th>Gavėjas</th>
+                    <th>Informacija</th>
+                    {% if all %}
+                    <th>Seniūnija</th>
+                    {% endif %}
+                    <th>Adresas</th>
+                </tr>
             {% for n in notifications %}
                 <tr>
-                    <td>{{ n.date }}</td>
-                    <td>{{ n.number }}</td>
+                    <td>{{ n.date|slice(0,16) }}</td>
                     <td>{{ n.receiver }}</td>
-                    <td>{{ n.planned_work }}</td>
-                    <td>{{ n.type }}</td>
+                    <td>Dokumento numeris: {{ n.number }}<br />{{ n.planned_work }}<br />{{ n.content }}</td>
+                    {% if all %}
                     <td>{{ n.county }}</td>
+                    {% endif %}
                     <td>{{ n.address }}, {{ n.address2 }}</td>
                 </tr>
             {% endfor %}
