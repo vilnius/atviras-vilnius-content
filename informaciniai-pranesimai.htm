@@ -1,0 +1,46 @@
+title = "informaciniai-pranešimai"
+url = "/informaciniai-pranesimai"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+    $this['counties'] = Db::select('SELECT c.id, c.title, COUNT(n.id) AS cnt FROM county c LEFT JOIN notification n ON n.county=c.id GROUP BY c.id, c.title ORDER BY title');
+    $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n WHERE n.county=0');
+    $this['v_cnt'] = $v[0]->cnt;
+    
+    if(isset($_GET['county']))
+    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county', ['county' => intval($_GET['county'])]);
+}
+?>
+==
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <h2>Seniūnijos</h2>
+            <ul class="counties">
+                <li><a href="?county=0">Visos / nenurodyta ({{ v_cnt }})</a></li>
+                {% for c in counties %}
+                    <li><a href="?county={{ c.id }}">{{ c.title }} ({{ c.cnt }})</a></li>
+                {% endfor %}
+            </ul>
+            
+            <hr />
+            <table class="table table-condensed">
+            {% for n in notifications %}
+                <tr>
+                    <td>{{ n.date }}</td>
+                    <td>{{ n.number }}</td>
+                    <td>{{ n.receiver }}</td>
+                    <td>{{ n.planned_work }}</td>
+                    <td>{{ n.type }}</td>
+                    <td>{{ n.county }}</td>
+                    <td>{{ n.address }}, {{ n.address2 }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
