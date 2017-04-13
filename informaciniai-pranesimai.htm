@@ -44,6 +44,16 @@ function onStart()
         color:#fff;
         background:#16a085;
     }
+    .type {
+        display:block;
+        height: 68px;
+        width: 80px;
+    }
+    .treePermit{
+        background-image:url('{{ 'assets/images/medziai.png'|theme }}');
+        background-repeat:no-repeat;
+        background-size: contain;
+    }
 </style>
 
 <div class="container">
@@ -90,6 +100,7 @@ function onStart()
                 <tr>
                     <th width="130">Data</th>
                     <th width="250">Gavėjas</th>
+                    <th>Tipas</th>
                     <th>Informacija</th>
                     {% if all %}
                     <th>Seniūnija</th>
@@ -100,7 +111,8 @@ function onStart()
                 <tr>
                     <td>{{ n.date|slice(0,16) }}</td>
                     <td>{{ n.receiver|e }}</td>
-                    <td>Dokumento numeris: {{ n.number }}<br />{{ n.content }}:<br />{{ n.planned_work }}</td>
+                    <td><div class="type treePermit" title="{{ n.content }}"></div></td>
+                    <td>Dokumento numeris: {{ n.number }}:<br />{{ n.planned_work }}</td>
                     {% if all %}
                     <td>{{ n.county }}</td>
                     {% endif %}
