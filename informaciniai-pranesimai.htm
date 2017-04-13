@@ -100,7 +100,7 @@ function onStart()
                 <tr>
                     <td>{{ n.date|slice(0,16) }}</td>
                     <td>{{ n.receiver|e }}</td>
-                    <td>Dokumento numeris: {{ n.number }}<br />{{ n.planned_work }}<br />{{ n.content }}</td>
+                    <td>Dokumento numeris: {{ n.number }}<br />{{ n.content }}:<br />{{ n.planned_work }}</td>
                     {% if all %}
                     <td>{{ n.county }}</td>
                     {% endif %}
