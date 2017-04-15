@@ -3,6 +3,14 @@ url = "/informaciniai-pranesimai-rss"
 is_hidden = 0
 contentType = "rss"
 ==
+<?php
+function onStart()
+{
+    echo '<?xml version="1.0" encoding="utf-8"?>';
+}
+?>
+==
+{{ xml }}
 <rss version="2.0">
   <channel>
     <title>FeedForAll Sample Feed</title>
