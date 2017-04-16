@@ -6,6 +6,15 @@ contentType = "rss"
 <?php
 function onStart()
 {
+    if(isset($_GET['county'])){
+    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county ORDER BY date DESC', ['county' => intval($_GET['county'])]);
+    $county=Db::select('SELECT * FROM county c WHERE c.id=:county', ['county' => intval($_GET['county'])]);
+    $this['county'] = $county[0];
+    }
+    else{
+    $this['all']=true;
+    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id ORDER BY date DESC LIMIT 50');
+    }
     echo '<?xml version="1.0" encoding="utf-8"?>';
 }
 ?>
