@@ -7,7 +7,7 @@ contentType = "rss"
 function onStart()
 {
     if(isset($_GET['county'])){
-    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county ORDER BY date DESC', ['county' => intval($_GET['county'])]);
+    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county ORDER BY date DESC LIMIT 50', ['county' => intval($_GET['county'])]);
     $county=Db::select('SELECT * FROM county c WHERE c.id=:county', ['county' => intval($_GET['county'])]);
     $this['county'] = $county[0];
     }
@@ -43,19 +43,17 @@ function onStart()
       <height>48</height>
     </image>
     
+    {% for n in notifications %}
+
     <item>
-      <title>RSS Solutions for Restaurants</title>
-      <description>&lt;b&gt;FeedForAll &lt;/b&gt;helps Restaurant&apos;s communicate with customers. Let your customers know the latest specials or events.&lt;br&gt;
-&lt;br&gt;
-RSS feed uses include:&lt;br&gt;
-&lt;i&gt;&lt;font color=&quot;#FF0000&quot;&gt;Daily Specials &lt;br&gt;
-Entertainment &lt;br&gt;
-Calendar of Events &lt;/i&gt;&lt;/font&gt;</description>
+      <title>{{ n.county }}, {{ n.address }}, {{ n.address2 }}</title>
+      <description>{{ n.content }} {{ n.planned_work|raw }}</description>
       <link>http://www.feedforall.com/restaurant.htm</link>
-      <category domain="www.dmoz.com">Computers/Software/Internet/Site Management/Content Management</category>
+      <category domain="www.dmoz.com">{{ n.type }}</category>
       <comments>http://www.feedforall.com/forum</comments>
-      <pubDate>Tue, 19 Oct 2004 11:09:11 -0400</pubDate>
+      <pubDate>{{ n.date | date("D, d M Y h:i:s O") }}</pubDate>
     </item>
+    {% endfor %}
     
   </channel>
 </rss>
