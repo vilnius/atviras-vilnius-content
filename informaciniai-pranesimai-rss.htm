@@ -41,7 +41,6 @@ function onStart()
     </image>
     
     {% for n in notifications %}
-
     <item>
       <title>{{ n.county }}, {{ n.address }}, {{ n.address2 }}</title>
       <description>{{ n.content }} {{ n.planned_work|raw }}</description>
