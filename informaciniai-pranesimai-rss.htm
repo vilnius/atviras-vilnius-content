@@ -22,25 +22,22 @@ function onStart()
 {{ xml }}
 <rss version="2.0">
   <channel>
-    <title>FeedForAll Sample Feed</title>
-    <description>RSS is a fascinating technology. The uses for RSS are expanding daily. Take a closer look at how various industries are using the benefits of RSS in their businesses.</description>
-    <link>http://www.feedforall.com/industry-solutions.htm</link>
-    <category domain="www.dmoz.com">Computers/Software/Internet/Site Management/Content Management</category>
-    <copyright>Copyright 2004 NotePage, Inc.</copyright>
-    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 19 Oct 2004 13:39:14 -0400</lastBuildDate>
-    <managingEditor>marketing@feedforall.com</managingEditor>
-    <pubDate>Tue, 19 Oct 2004 13:38:55 -0400</pubDate>
-    <webMaster>webmaster@feedforall.com</webMaster>
-    <generator>FeedForAll Beta1 (0.0.1.8)</generator>
+    <title>Informaciniai pranešimai</title>
+    <description>Informacija apie įvairius dalykus vykstančius mieste.</description>
+    <link>http://atviras.vilnius.lt/informaciniai-pranesimai-rss</link>
+    <category domain="atviras.vilnius.lt">Miestiečių informavimas</category>
+    
+    <language>lt-lt</language>
+    <lastBuildDate>{{ lastUpdate | date("D, d M Y h:i:s O") }}</lastBuildDate>
+    <managingEditor>povilas.poderskis@vilnius.lt</managingEditor>
+    <pubDate>Sat, 22 Oct 2017 13:38:55 +0300</pubDate>
+    <webMaster>atviras@vilnius.lt</webMaster>
+    <generator>Atviras Vilnius</generator>
     <image>
-      <url>http://www.feedforall.com/ffalogo48x48.gif</url>
-      <title>FeedForAll Sample Feed</title>
-      <link>http://www.feedforall.com/industry-solutions.htm</link>
-      <description>FeedForAll Sample Feed</description>
-      <width>48</width>
-      <height>48</height>
+      <url>http://atviras.vilnius.lt/themes/responsiv-flat/assets/images/logo.png</url>
+      <title>Atviras Vilnius</title>
+      <link>http://atviras.vilnius.lt</link>
+      <description>Atviras Vilnius</description>
     </image>
     
     {% for n in notifications %}
@@ -48,10 +45,11 @@ function onStart()
     <item>
       <title>{{ n.county }}, {{ n.address }}, {{ n.address2 }}</title>
       <description>{{ n.content }} {{ n.planned_work|raw }}</description>
-      <link>http://www.feedforall.com/restaurant.htm</link>
-      <category domain="www.dmoz.com">{{ n.type }}</category>
+      <link>http://atviras.vilnius.lt/informaciniai-pranesimai</link>
+      <category domain="atviras.vilnius.lt">{{ n.type }}</category>
       <comments>http://www.feedforall.com/forum</comments>
       <pubDate>{{ n.date | date("D, d M Y h:i:s O") }}</pubDate>
+      <author>{{ n.receiver }}</author>
     </item>
     {% endfor %}
     
