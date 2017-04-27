@@ -1,0 +1,39 @@
+title = "Pranešimas"
+url = "/pranesimas/:id"
+layout = "default"
+is_hidden = 0
+contentType = "html"
+==
+<?php
+function onStart(){
+    
+    $n=Db::select('SELECT * FROM notification c WHERE c.id=:id', ['id' => $this->param('id')]);
+    $nd=Db::select('SELECT * FROM notificationfile c WHERE c.document=:id', ['id' => $this->param('id')]);
+    
+    $this->page['n']=$n[0];
+    $this->page['n']->documents=$nd;
+    
+}
+?>
+==
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Pranešimas</h4>
+            <p>{{ this.page.n.date|slice(0,16) }}</p>
+            <p>{{ this.page.n.receiver|e }}</p>
+            <p>Dokumento numeris: {{ this.page.n.number }}<br />{{ this.page.n.planned_work|raw }}</p>
+            <p>{{ this.page.n.address }}, {{ this.page.n.address2 }}</p>
+            <br />
+            <p>Dokumentai:</p>
+            <ul>
+                {% for f in this.page.n.documents %}
+                <li>{{ f.filename }} - <a href="/notifications.php?responseType=file&q={{ f.id }}">Atsisiųsti</a></li>
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>
+    
+</div>
