@@ -14,9 +14,12 @@ function onStart()
     $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n');
     $this['t_cnt'] = $v[0]->cnt;
     
-    
+    $this['rss']='<link rel="alternate" type="application/rss+xml" title="Informaciniai pranešimai" href="http://atviras.vilnius.lt/informaciniai-pranesimai-rss" />';
     
     if(isset($_GET['county'])){
+        
+    
+    $this['rss']='<link rel="alternate" type="application/rss+xml" title="Informaciniai pranešimai" href="http://atviras.vilnius.lt/informaciniai-pranesimai-rss?county='.intval($_GET['county']).'" />';
     $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county ORDER BY date DESC', ['county' => intval($_GET['county'])]);
     $county=Db::select('SELECT * FROM county c WHERE c.id=:county', ['county' => intval($_GET['county'])]);
     $this['county'] = $county[0];

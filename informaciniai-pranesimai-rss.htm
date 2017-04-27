@@ -22,9 +22,20 @@ function onStart()
 {{ xml }}
 <rss version="2.0">
   <channel>
-    <title>Informaciniai pranešimai</title>
+              
+    {% if all %}
+        <title>Informaciniai pranešimai</title>
+    {% else %}
+        <title>{{ county.title }} - Informaciniai pranešimai</title>
+    {% endif %}
     <description>Informacija apie įvairius dalykus vykstančius mieste.</description>
+    
+    {% if all %}
     <link>http://atviras.vilnius.lt/informaciniai-pranesimai-rss</link>
+    {% else %}
+    <link>http://atviras.vilnius.lt/informaciniai-pranesimai-rss?county={{ county.id }}</link>
+    {% endif %}
+    
     <category domain="atviras.vilnius.lt">Miestiečių informavimas</category>
     
     <language>lt-lt</language>
@@ -44,7 +55,7 @@ function onStart()
     <item>
       <title>{{ n.county }}, {{ n.address }}, {{ n.address2 }}</title>
       <description>{{ n.content }} {{ n.planned_work|raw }}</description>
-      <link>http://atviras.vilnius.lt/informaciniai-pranesimai</link>
+      <link>http://atviras.vilnius.lt/pranesimas/{{ n.id }}</link>
       <category domain="atviras.vilnius.lt">{{ n.type }}</category>
       <comments>http://www.feedforall.com/forum</comments>
       <pubDate>{{ n.date | date("D, d M Y h:i:s O") }}</pubDate>
