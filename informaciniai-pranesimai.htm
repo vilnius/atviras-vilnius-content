@@ -7,6 +7,23 @@ contentType = "html"
 <?php
 function onStart()
 {
+    $filter=array();
+    foreach($_GET['filter'] as $k=>$f){
+        if(!empty($f))
+        switch($k){
+            case 'address':
+            case 'receiver':
+            case 'planned_work':
+            case 'county':
+                $filterVals[$k]=$f;
+                $filter[]=$k."=:".$k;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    
     $this['counties'] = Db::select('SELECT c.id, c.title, COUNT(n.id) AS cnt FROM county c LEFT JOIN notification n ON n.county=c.id GROUP BY c.id, c.title ORDER BY title');
     $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n WHERE n.county=0');
     $this['v_cnt'] = $v[0]->cnt;    
@@ -103,7 +120,7 @@ function onStart()
 </div>
 
 
-
+    <form method="get">
             <table class="table table-condensed">
                 <tr>
                     <th width="130">Data</th>
@@ -114,6 +131,16 @@ function onStart()
                     <th>Seniūnija</th>
                     {% endif %}
                     <th width="300">Adresas</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input type="text" name="filter[receiver]" /></th>
+                    <th></th>
+                    <th><input type="text" name="filter[planned_work]" /></th>
+                    {% if all %}
+                    <th></th>
+                    {% endif %}
+                    <th width="300"><input type="text" name="filter[address]" /></th>
                 </tr>
             {% for n in notifications %}
                 <tr>
@@ -128,3 +155,5 @@ function onStart()
                 </tr>
             {% endfor %}
             </table>
+            <input type="submit" class="hide" />
+        </form>
