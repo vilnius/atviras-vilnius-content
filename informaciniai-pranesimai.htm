@@ -8,20 +8,28 @@ contentType = "html"
 function onStart()
 {
     $filter=array();
-    foreach($_GET['filter'] as $k=>$f){
-        if(!empty($f))
-        switch($k){
-            case 'address':
-            case 'receiver':
-            case 'planned_work':
-            case 'county':
-                $filterVals[$k]=$f;
-                $filter[]=$k."=:".$k;
-                break;
-            default:
-                break;
+    $filterVals=array();
+    $filterParams=array();
+    
+    if(isset($_GET['filter']) && is_array($_GET['filter']))
+        foreach($_GET['filter'] as $k=>$f){
+            if(!empty($f))
+            switch($k){
+                case 'address':
+                    /*$filterVals[$k]='%'.$f.'%';
+                    $filter[]=" (address LIKE :".$k." OR address2 LIKE :".$k.") ";
+                    break;*/
+                case 'receiver':
+                case 'planned_work':
+                case 'county':
+                    $this[$k]=$f;
+                    $filterVals[$k]='%'.$f.'%';
+                    $filter[]=$k." LIKE :".$k;
+                    break;
+                default:
+                    break;
+            }
         }
-    }
     
     
     $this['counties'] = Db::select('SELECT c.id, c.title, COUNT(n.id) AS cnt FROM county c LEFT JOIN notification n ON n.county=c.id GROUP BY c.id, c.title ORDER BY title');
@@ -31,20 +39,42 @@ function onStart()
     $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n');
     $this['t_cnt'] = $v[0]->cnt;
     
-    $this['rss']='<link rel="alternate" type="application/rss+xml" title="Informaciniai pranešimai" href="http://atviras.vilnius.lt/informaciniai-pranesimai-rss" />';
     
     if(isset($_GET['county'])){
         
-    
-    $this['rss']='<link rel="alternate" type="application/rss+xml" title="Informaciniai pranešimai" href="http://atviras.vilnius.lt/informaciniai-pranesimai-rss?county='.intval($_GET['county']).'" />';
-    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county ORDER BY date DESC', ['county' => intval($_GET['county'])]);
-    $county=Db::select('SELECT * FROM county c WHERE c.id=:county', ['county' => intval($_GET['county'])]);
-    $this['county'] = $county[0];
+        $this['rss']='<link rel="alternate" type="application/rss+xml" title="Informaciniai pranešimai" href="http://atviras.vilnius.lt/informaciniai-pranesimai-rss?county='.intval($_GET['county']).'" />';
+        
+        $filterVals['county']=intval($_GET['county']);
+        
+        $this['notifications'] = 
+        Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id WHERE n.county=:county
+        AND ('.((count($filter)>0)?implode(" AND ", $filter):'1=1').')
+        ORDER BY date DESC', $filterVals);
+        
+        $county=Db::select('SELECT * FROM county c WHERE c.id=:county', ['county' => intval($_GET['county'])]);
+        $this['county'] = $county[0];
+        
     }
     else{
-    $this['all']=true;
-    $this['notifications'] = Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id ORDER BY date DESC LIMIT 50');
+        
+        $this['all']=true;
+        $this['notifications'] = 
+        Db::select('SELECT n.*, c.title AS county FROM notification n LEFT JOIN county c ON n.county=c.id
+        WHERE ('.((count($filter)>0)?implode(" AND ", $filter):'1=1').')
+        ORDER BY date DESC LIMIT 50', $filterVals);
+        
     }
+    
+    $rssFilter=array();
+    foreach($filterVals as $k=>$f){
+        if($k=='county')
+            $rssFilter['county']=$f;
+        else
+            $rssFilter['filter['.$k.']']=$f;
+    }
+    $this['rssFilter']=http_build_query($rssFilter);
+    $this['rss']='<link rel="alternate" type="application/rss+xml" title="Informaciniai pranešimai" href="http://atviras.vilnius.lt/informaciniai-pranesimai-rss" />';
+    
 }
 ?>
 ==
@@ -119,8 +149,11 @@ function onStart()
     </div>
 </div>
 
-
     <form method="get">
+    {% if all %}
+    {% else %}
+    <input type="hidden" name="county" value="{{ county.id }}" />
+    {% endif %}
             <table class="table table-condensed">
                 <tr>
                     <th width="130">Data</th>
@@ -134,13 +167,13 @@ function onStart()
                 </tr>
                 <tr>
                     <th></th>
-                    <th><input type="text" name="filter[receiver]" /></th>
+                    <th><input type="text" name="filter[receiver]" value="{{ receiver }}" /></th>
                     <th></th>
-                    <th><input type="text" name="filter[planned_work]" /></th>
+                    <th><input type="text" name="filter[planned_work]" value="{{ planned_work }}" /></th>
                     {% if all %}
                     <th></th>
                     {% endif %}
-                    <th width="300"><input type="text" name="filter[address]" /></th>
+                    <th width="300"><input type="text" name="filter[address]" value="{{ address }}" /></th>
                 </tr>
             {% for n in notifications %}
                 <tr>
@@ -157,3 +190,13 @@ function onStart()
             </table>
             <input type="submit" class="hide" />
         </form>
+        
+
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-12">
+        <p><a href="/informaciniai-pranesimai-rss?{{ rssFilter }}">RSS prenumerata</a></p>
+        </div>
+    </div>
+</div>
