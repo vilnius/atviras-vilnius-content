@@ -2,6 +2,7 @@ title = "Duomenų atvėrimas iš MASIS"
 url = "/pagalba/duomenu-atverimas-masis"
 layout = "default"
 is_hidden = 0
+contentType = "html"
 ==
 <div class="container">
     <div class="row">
@@ -38,9 +39,7 @@ sqlcmd -f 65001 -S "%server%" -d "%database%" -U "%user%" -P "%pass%" -s"	" -W -
 winscp /command "option batch abort" "option confirm off" "open sftp://%ftpUser%:%ftpPass%@%ftpHost%" "put %filename%" "exit"
 </pre>
 
-<pre>
-    
-</pre>
+
         </div>
     </div>
 </div>
