@@ -54,10 +54,33 @@ function onStart()
 <input id="debtDateVar" type="hidden" value="{{ this.page.debtDate }}" />
 <div class="container" id="contentContainer">
 
+	    <table class="table">
+    	    
+    	    <tr>
+    	        <th>Biudžeto versija</th>
+    	        <th>I ketv. suma, &euro;</th>
+    	        <th>II ketv. suma, &euro;</th>
+    	        <th>III ketv. suma, &euro;</th>
+    	        <th>IV ketv. suma, &euro;</th>
+    	        <th>Metinė suma, &euro;</th>
+    	        <th></th>
+    	    </tr>
+    	    {% for n in versions %}
+    	    <tr>
+    	        <td>{{ n.BIUDZETAS }}</td>
+    	        <td>{{ n.I_KETV }}</td>
+    	        <td>{{ n.II_KETV }}</td>
+    	        <td>{{ n.III_KETV }}</td>
+    	        <td>{{ n.IV_KETV }}</td>
+    	        <td>{{ n.METINE_SUMA }}</td>
+    	        <td><a href="/finansai/patvirtintas-biudzetas?version={{ n.BIUDZETAS }}">Peržiūrėti</a></td>
+    	    </tr>
+    	    {% endfor %}
+	    </table>
 	
 		<div class="row">
 		    <div class="col-md-12">
-		    	<p>Infografike parodytos einamajame biudžete numatomos skirti sumos įvairioms programoms, tikslams ir priemonėms finansuoti.</p>
+		    	<p>Infografike parodytos biudžete numatomos skirti sumos įvairioms programoms, tikslams ir priemonėms finansuoti.</p>
 		    	
 				<p>Duomenų šaltinis: <a href="https://github.com/vilnius/biudzetas" target="_blank">Vilniaus miesto savivaldybės atviri duomenys</a></p>
 		    </div>
@@ -71,35 +94,9 @@ function onStart()
 			</div>
 		</div>
 		    
-		<hr />
-		
 		<input type="hidden" name="currentVersion" id="currentVersion" value="{{ currentVersion }}" />
 		
 		
-    	    <table class="table">
-        	    
-        	    <tr>
-        	        <td> Biudžeto versija</td>
-        	        <td>I ketv., &euro;</td>
-        	        <td>{{ n.II_KETV }}</td>
-        	        <td>{{ n.III_KETV }}</td>
-        	        <td>{{ n.IV_KETV }}</td>
-        	        <td>{{ n.METINE_SUMA }}</td>
-        	        <td><a href="/finansai/patvirtintas-biudzetas?version={{ n.BIUDZETAS }}">Peržiūrėti</a></td>
-        	    </tr>
-        	    {% for n in versions %}
-        	    <tr>
-        	        <td>{{ n.BIUDZETAS }}</td>
-        	        <td>{{ n.I_KETV }}</td>
-        	        <td>{{ n.II_KETV }}</td>
-        	        <td>{{ n.III_KETV }}</td>
-        	        <td>{{ n.IV_KETV }}</td>
-        	        <td>{{ n.METINE_SUMA }}</td>
-        	        <td><a href="/finansai/patvirtintas-biudzetas?version={{ n.BIUDZETAS }}">Peržiūrėti</a></td>
-        	    </tr>
-        	    {% endfor %}
-    	    </table>
-	    
 	    <hr />
 		
 		
