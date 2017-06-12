@@ -15,15 +15,18 @@ function onStart()
     $this->addCss('//cdnjs.cloudflare.com/ajax/libs/dc/2.0.0-alpha.2/dc.css');
     //$this->page['debtDate']=isset($_GET['date'])?date('Y-m-d', strtotime($_GET['date'])):date('Y-m-d');
     
-    $this['versions']=Db::select('SELECT BIUDZETAS FROM `budget` GROUP BY BIUDZETAS ORDER BY BIUDZETAS DESC');
+    $this['versions']=Db::select('SELECT BIUDZETAS, SUM(I_KETV) I_KETV, SUM(II_KETV) II_KETV, SUM(III_KETV) III_KETV, SUM(IV_KETV) IV_KETV, SUM(METINE_SUMA) METINE_SUMA, COUNT(id) FROM `budget` GROUP BY BIUDZETAS ORDER BY BIUDZETAS DESC');
     $this['currentVersion']='';
     
     $this['budgetString']='Vilniaus miesto patvirtintas biudžetas per 2017 metus';
     if(isset($_GET['version'])){
         $version=Db::select('SELECT BIUDZETAS FROM `budget` WHERE BIUDZETAS=:version', ['version' => $_GET['version']]);
         if($version[0]){
-        $this['budgetString']='Pasirinkta biudžeto versija "'.$version[0]->BIUDZETAS.'"';
-        $this['currentVersion']=$version[0]->BIUDZETAS;
+            $this['budgetString']='Pasirinkta biudžeto versija "'.$version[0]->BIUDZETAS.'"';
+            $this['currentVersion']=$version[0]->BIUDZETAS;
+            foreach($this['versions'] as &$v){
+                $v->selected=(($v->BIUDZETAS==$this['currentVersion'])?'selected="selected"':'');
+            }
         }
         //var_dump($versions);
     }
@@ -51,15 +54,6 @@ function onStart()
 <input id="debtDateVar" type="hidden" value="{{ this.page.debtDate }}" />
 <div class="container" id="contentContainer">
 
-        <form method="GET">
-        <input type="hidden" name="currentVersion" id="currentVersion" value="{{ currentVersion }}" />
-	    <select name="version" onchange="this.form.submit();">
-	    {% for n in versions %}
-	    <option value="{{ n.BIUDZETAS }}">{{ n.BIUDZETAS }}</option>
-	    {% endfor %}
-	    </select>
-	    <input type="submit" style="display:none;" />
-	    </form>
 	
 		<div class="row">
 		    <div class="col-md-12">
@@ -78,6 +72,36 @@ function onStart()
 		</div>
 		    
 		<hr />
+		
+		<input type="hidden" name="currentVersion" id="currentVersion" value="{{ currentVersion }}" />
+		
+		
+    	    <table class="table">
+        	    
+        	    <tr>
+        	        <td> Biudžeto versija</td>
+        	        <td>I ketv., &euro;</td>
+        	        <td>{{ n.II_KETV }}</td>
+        	        <td>{{ n.III_KETV }}</td>
+        	        <td>{{ n.IV_KETV }}</td>
+        	        <td>{{ n.METINE_SUMA }}</td>
+        	        <td><a href="/finansai/patvirtintas-biudzetas?version={{ n.BIUDZETAS }}">Peržiūrėti</a></td>
+        	    </tr>
+        	    {% for n in versions %}
+        	    <tr>
+        	        <td>{{ n.BIUDZETAS }}</td>
+        	        <td>{{ n.I_KETV }}</td>
+        	        <td>{{ n.II_KETV }}</td>
+        	        <td>{{ n.III_KETV }}</td>
+        	        <td>{{ n.IV_KETV }}</td>
+        	        <td>{{ n.METINE_SUMA }}</td>
+        	        <td><a href="/finansai/patvirtintas-biudzetas?version={{ n.BIUDZETAS }}">Peržiūrėti</a></td>
+        	    </tr>
+        	    {% endfor %}
+    	    </table>
+	    
+	    <hr />
+		
 		
 		<h2>Tikslas</h2>
 		<div id="tikslas"></div>
