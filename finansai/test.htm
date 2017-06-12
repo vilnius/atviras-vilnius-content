@@ -2,6 +2,7 @@ title = "Patvirtintas biudžetas"
 url = "/finansai/patvirtintas-biudzetas"
 layout = "default"
 is_hidden = 0
+contentType = "html"
 ==
 <?php
 function onStart()
@@ -22,11 +23,11 @@ function onStart()
     font-size: 14px;
     line-height: 1.428571429;
 }
-.dc-table-column_2{
+.dc-table-column_1{
     white-space: normal;
     text-align:left;
 }
- .dc-table-column_4 , .dc-table-column_5 , .dc-table-column_6 , .dc-table-column_7 {
+ .dc-table-column_2, .dc-table-column_3 , .dc-table-column_4 , .dc-table-column_5 , .dc-table-column_6 , .dc-table-column_7 {
     white-space: nowrap;
     font-family: monospace;
     text-align: right;
@@ -56,10 +57,9 @@ function onStart()
 		
 		<h2>Tikslas</h2>
 		<div id="tikslas"></div>
+		
 		<h2>Programa</h2>
 		<div id="programa"></div>
-		<h2>Priemonė</h2>
-		<div id="priemone"></div>
 		
 		<h2>Asignavimų valdytojas</h2>
 		<div id="valdytojas"></div>
