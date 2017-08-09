@@ -11,6 +11,7 @@ function onStart()
     $filterVals=array();
     $filterParams=array();
     
+    $filter[]='active=1';
     if(isset($_GET['filter']) && is_array($_GET['filter']))
         foreach($_GET['filter'] as $k=>$f){
             if(!empty($f))
@@ -33,10 +34,10 @@ function onStart()
     
     
     $this['counties'] = Db::select('SELECT c.id, c.title, COUNT(n.id) AS cnt FROM county c LEFT JOIN notification n ON n.county=c.id GROUP BY c.id, c.title ORDER BY title');
-    $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n WHERE n.county=0');
+    $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n WHERE n.county=0 AND n.active=1');
     $this['v_cnt'] = $v[0]->cnt;    
     
-    $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n');
+    $v=Db::select('SELECT COUNT(n.id) AS cnt FROM notification n WHERE n.active=1');
     $this['t_cnt'] = $v[0]->cnt;
     
     
