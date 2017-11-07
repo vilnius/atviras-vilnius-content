@@ -3,6 +3,7 @@ url = "/eismo-situacijos"
 layout = "default"
 description = "Čia pateikiamos problemos identifikuojamos pagal eismo valdymo centro parodymus iš vaizdo kamerų ir iš srautų detektorių."
 is_hidden = 0
+contentType = "html"
 ==
 <?php
 function onStart(){
@@ -12,6 +13,12 @@ function onStart(){
 }
 ?>
 ==
+<style type="text/css">
+#trafficTable td div{
+    color:#fff;
+    padding:1px;
+}   
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
