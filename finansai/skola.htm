@@ -14,7 +14,7 @@ function onStart()
     $this->addJs('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.js');
 	$this->addJs('//cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js');
     $this->addJs('assets/javascript/dc.js');
-    $this->addJs('assets/javascript/skola.js');
+    $this->addJs('assets/javascript/skola.js?v=1.0.1');
     $this->addCss('//cdnjs.cloudflare.com/ajax/libs/dc/2.0.0-alpha.2/dc.css');
     $this->page['debtDate']=isset($_GET['date'])?date('Y-m-d', strtotime($_GET['date'])):date('Y-m-d');
 }
