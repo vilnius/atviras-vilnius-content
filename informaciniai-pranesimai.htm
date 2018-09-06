@@ -158,7 +158,7 @@ function onStart()
             <table class="table table-condensed">
                 <tr>
                     <th width="130">Data</th>
-                    <th width="250">Gavėjas</th>
+                   <!-- <th width="250">Gavėjas</th> -->
                     <th>Tipas</th>
                     <th width="300">Informacija</th>
                     {% if all %}
@@ -179,7 +179,7 @@ function onStart()
             {% for n in notifications %}
                 <tr>
                     <td>{{ n.date|slice(0,16) }}</td>
-                    <td>{{ n.receiver|e }}</td>
+                    <!--<td>{{ n.receiver|e }}</td>-->
                     <td><div class="type {% if n.type=="Kirtimų leidimas" %}treePermit{% else %}planning{% endif %}" title="{{ n.content }}"></div></td>
                     <td>Dokumento numeris: {{ n.number }}:<br />{{ n.planned_work|raw }}</td>
                     {% if all %}
