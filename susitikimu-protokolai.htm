@@ -11,9 +11,9 @@ function onStart()
     $this->addJs('assets/javascript/knockout.simpleGrid.3.0.js');
     $this->addJs('assets/javascript/protokolai.js');
 
-    $this->page['q']= $_GET['q'];
-    $this->page['qt']= $_GET['qt'];
-    $this->page['register']= intval($_GET['register']);
+    $this->page['q']= isset($_GET['q'])?$_GET['q']:'';
+    $this->page['qt']= isset($_GET['qt'])?$_GET['qt']:'';
+    $this->page['register']= isset($_GET['register'])?$_GET['register']:'';
 }
 ?>
 ==
